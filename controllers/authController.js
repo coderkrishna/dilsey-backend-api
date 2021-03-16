@@ -4,6 +4,10 @@ const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
 
+const sgMail = require("@sendgrid/mail");
+
+sgMail.setApiKey(process.env.SG_API_KEY);
+
 const register = (req, res, next) => {
     
     User.findOne({email : req.body.email})
@@ -33,6 +37,15 @@ const register = (req, res, next) => {
                         error: err
                     });
                 }
+
+                const msg = {
+                        to: req.body.email, // Change to your recipient
+                        from: 'pallav@kahaniya.com', // Change to your verified sender
+                        subject: `Your DilseY account created succesfully`,
+                        text: `Your account with DilseY is created succesfully,please login with the id ${idRes} as USERNAME and the password provided by you as the  PASSWORD`, 
+                        html: `<strong>WELCOME TO DILSEY</strong><br><p>Your account with DilseY is created succesfully<br>Please login with the username ${idRes} and the password which you set during the registration time.</p>`
+                       
+                }
         
                 let user = new User({
                     customId: idRes,
@@ -42,9 +55,17 @@ const register = (req, res, next) => {
                     phone: req.body.phone,
                     password: hashedPass
                 });
-            
-                user.save().then(user => {
-                    // use a email service to send the user a conformation.
+
+                user.save().then(user => { 
+                      sgMail
+                        .send(msg)
+                        .then(() => {
+                          console.log('Email sent to the user');
+                        })
+                        .catch((error) => {
+                          console.error(error)
+                        })
+                                        
                     res.json({
                         dvid: idRes,
                         message: "User added successfully!"
@@ -53,6 +74,7 @@ const register = (req, res, next) => {
                     res.json({
                         message: "An error occured!"
                     });
+                    console.log(error)
                 });
             });
         }
@@ -69,6 +91,7 @@ const login = (req, res, next) => {
 
         if(user) {
             bcrypt.compare(password, user.password, (err, result) => {
+
                 if(err) {
                     res.json({
                         error: err

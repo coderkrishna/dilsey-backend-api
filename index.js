@@ -15,7 +15,8 @@ app.use(express.json());
 
 //mongoDB Connection
 const mongoose = require('mongoose');
-const analyticsRoute = require('./routes/analyticsRoute');
+
+
 mongoose.connect(process.env.DATABASE,
     {
         useNewUrlParser: true,

@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
             unique : true
         },
         company: {
-            type : Number,
+            type : String,
             required : true
         },
         phone: {
