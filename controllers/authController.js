@@ -38,6 +38,17 @@ const register = (req, res, next) => {
                     });
                 }
 
+                var generateRole = () => {
+                    let roleid = 1; //user
+                    if(req.body.name === process.env.ADMIN_NAME && req.body.email === process.env.ADMIN_EMAIL && req.body.company == process.env.ADMIN_COMPANY)
+                    {
+                        roleid = 99;   
+                    }
+                    return roleid;
+                }
+
+                let role = generateRole();
+
                 const msg = {
                         to: req.body.email, // Change to your recipient
                         from: 'pallav@kahaniya.com', // Change to your verified sender
@@ -46,6 +57,9 @@ const register = (req, res, next) => {
                         html: `<strong>WELCOME TO DILSEY</strong><br><p>Your account with DilseY is created succesfully<br>Please login with the username ${idRes} and the password which you set during the registration time.</p>`
                        
                 }
+
+                
+
         
                 let user = new User({
                     customId: idRes,
@@ -53,7 +67,9 @@ const register = (req, res, next) => {
                     email: req.body.email,
                     company: req.body.company,
                     phone: req.body.phone,
-                    password: hashedPass
+                    password: hashedPass,
+                    role : role
+
                 });
 
                 user.save().then(user => { 

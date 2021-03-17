@@ -23,10 +23,14 @@ const userSchema = new mongoose.Schema(
             required : true
         },
         phone: {
-            type: String
+            type: String,
+            maxlength:10
         },
         password: {
             type: String
+        },
+        role : {
+            type : Number
         }
     }, {timestamps: true}
 );

@@ -4,6 +4,11 @@ const questionSchema = new mongoose.Schema({
       "question" : {
           type : String,
       },
+      "options" : {
+          type : Array,
+          maxsize: 4,
+          required : true
+      },
 
       "answer" : {
           type : String

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const analyticsSchema = new mongoose.Schema({
-    users : {
+    noofusers : {
         type : Number,
         required :true
     },
@@ -16,7 +16,7 @@ const analyticsSchema = new mongoose.Schema({
     quizesTaken : {
         type :  Number,
     }
-})
+});
 
-const analytics = mongoose.model("analytics",analyticsSchema);
-module.exports = analyticsSchema;
+const Analytics = mongoose.model("analytics",analyticsSchema);
+module.exports = Analytics;
