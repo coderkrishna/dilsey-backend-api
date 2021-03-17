@@ -1,5 +1,4 @@
-const 
-const authUser = (req,res,next) => {
+ const authUser = (req,res,next) => {
     if(req.user == null){
       res.statusCode = 403;  
       res.json({

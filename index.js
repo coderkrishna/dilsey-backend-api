@@ -35,6 +35,9 @@ app.use('/home',authUser,questionRoute);
 app.use("/admin",authUser,authRole,adminRoute);
 // app.get('/', "Api deployed successfully!")
 
+app.get("/", () =>{
+    console.log("Successfully Deployed");
+})
 app.listen(port, () => {
     console.log("Server started on port: 8080");
 });
