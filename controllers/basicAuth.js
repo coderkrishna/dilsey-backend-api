@@ -1,6 +1,7 @@
+const 
 const authUser = (req,res,next) => {
     if(req.user == null){
-      res.status = 403;  
+      res.statusCode = 403;  
       res.json({
           "message" : "you need to signin first"
       })
@@ -9,9 +10,9 @@ const authUser = (req,res,next) => {
 }
 
 const setUser = (req, res, next) => {
-    const userId = req.body.dvid
+    const userId = req.body.dvid;
     if (userId) {
-      req.user = users.find(user => user.dvid === userId)
+      req.user = users.find({}).then((user) => user.dvid === userId)
     }
     next()
   }
