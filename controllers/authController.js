@@ -8,9 +8,9 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SG_API_KEY);
 
-const register = (req, res, next) => {
+const register =  async (req, res, next) => {
     
-    User.findOne({email : req.body.email})
+    await User.findOne({email : req.body.email})
     .then(user => {
         if(user) {
             res.json({
@@ -72,8 +72,8 @@ const register = (req, res, next) => {
 
                 });
 
-                user.save().then(user => { 
-                      sgMail
+                 await user.save().then(user => { 
+                       sgMail
                         .send(msg)
                         .then(() => {
                           console.log('Email sent to the user');
@@ -97,12 +97,12 @@ const register = (req, res, next) => {
     });
 }
 
-const login = (req, res, next) => {
+const login = async (req, res, next) => {
 
     var id = req.body.dvid;
     var password = req.body.password;
 
-    User.findOne({customId: id})
+    await User.findOne({customId: id})
     .then(user => {
 
         if(user) {
@@ -131,6 +131,8 @@ const login = (req, res, next) => {
             });
         }
     });
+
+
 }
 
 module.exports = {
