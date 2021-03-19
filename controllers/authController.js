@@ -32,6 +32,7 @@ const register =  (req, res, next) => {
                     res.json({
                         error: err
                     });
+                    console.log("error occured in the bcrypt hash function");
                 }
 
                 var generateRole = () => {
