@@ -1,10 +1,11 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/userSchema");
 
 const authUser = (req,res,next) => {
       try {
           const token = req.headers.authorization.split(" ")[1];
           const decoded = jwt.verify(token,process.env.JWT_KEY);
-          req.userData = decoded;
+          req.user = decoded;
           next();
       } catch (error) {
           return res.status(401).json({
@@ -17,7 +18,7 @@ const authUser = (req,res,next) => {
 const setUser = (req, res, next) => {
     const userId = req.body.email;
     if (userId) {
-      req.user = users.find({}).then((user) => user.email === userId)
+      req.user = User.find({}).then((user) => user.email === userId)
     }
     next()
   }
