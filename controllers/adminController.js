@@ -6,8 +6,8 @@ const analytics = require("../models/analyticsSchema");
     .then((result) => {
        res.json({
           "noofusers" : result[0],
-          "usersQuiz" : result[1],
-          "usersPassed" : result[2],
+          "usersquiz" : result[1],
+          "userspassed" : result[2],
           "noofquizzes" : result[3]
        });
     }) 
