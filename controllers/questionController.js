@@ -5,7 +5,7 @@ const randomQuestions = (req,res,next) => {
     question.Question.find({})//returns a cursor object which is an array
     .then((questions) => {
         if(questions.length == 0 || questions.length < process.env.NOOFQUESTIONS){
-           res.json({
+           return res.json({
                "status" : "Not enough questions in the database",
            })   
         }
