@@ -10,13 +10,13 @@ const randomQuestions = (req,res,next) => {
            })   
         }
         else{
-            question.find({}).limit(1)            
+            question.aggregate({$select : {size : process.env.NOOFQUESTIONS}})            
              .then((selectedQuestions)=> {      
                 res.json({
                       "questions" : selectedQuestions,
                 })
             })
-            .catch(err => next(err))
+            .catch(err => console.log(err))
         }      
     })
     .catch(err => next(err));
