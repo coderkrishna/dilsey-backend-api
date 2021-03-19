@@ -15,9 +15,9 @@ const authUser = (req,res,next) => {
 }
 
 const setUser = (req, res, next) => {
-    const userId = req.body.dvid;
+    const userId = req.body.email;
     if (userId) {
-      req.user = users.find({}).then((user) => user.dvid === userId)
+      req.user = users.find({}).then((user) => user.email === userId)
     }
     next()
   }
