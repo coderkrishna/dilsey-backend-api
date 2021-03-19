@@ -22,7 +22,7 @@ const randomQuestions = (req,res,next) => {
 }
 
 const writeQuestions = (req,res,next) => {
-    var questionone = new question({
+    var questionone = new Question({
         question : req.body.question,
         options : req.body.options,
         answer : req.body.answer
@@ -33,7 +33,7 @@ const writeQuestions = (req,res,next) => {
         res.json({
             "result" : "Questions added succesfully."
         })
-    }).catch(err => {next(err)
+    }).catch(err => {
            console.log("error occured during insertion of questions into the database")
     })
 }
