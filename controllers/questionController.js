@@ -1,3 +1,4 @@
+const Question = require("../models/questionsSchema");
 const question = require("../models/questionsSchema");
 
 const randomQuestions = (req,res,next) => {
@@ -21,4 +22,22 @@ const randomQuestions = (req,res,next) => {
     .catch(err => next(err));
 }
 
-module.exports = randomQuestions;
+const writeQuestions = (req,res,next) => {
+    var question = new Question({
+        question : req.body.question,
+        options : req.body.options,
+        answer : req.body.answer
+    })
+
+    question.save()
+    .then((result) => {
+        res.json({
+            "result" : "questions inserted succesfully"
+        })
+    }).catch(err => {next(err)
+           console.log("error occured during insertion of questions into the database")
+    })
+}
+module.exports = {
+    randomQuestions,writeQuestions
+}
