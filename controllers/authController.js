@@ -85,7 +85,7 @@ const login =  (req, res, next) => {
             bcrypt.compare(password, user.password)
             .then((result) => {
                   if(result) {
-                    let token = jwt.sign({name: user.name}, 'verySecretValue', {expiresIn: '1h'});
+                    let token = jwt.sign({name: user.name}, process.env.JWT_KEY , {expiresIn: '1h'});
                     res.json({
                         message: "Login Successfully!",
                         token: token
