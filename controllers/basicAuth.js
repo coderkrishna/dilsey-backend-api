@@ -1,4 +1,9 @@
- const authUser = (req,res,next) => {
+const jwt = require("jsonwebtoken");
+
+
+
+const authUser = (req,res,next) => {
+    
     if(req.user == null){
       res.statusCode = 403;  
       res.json({

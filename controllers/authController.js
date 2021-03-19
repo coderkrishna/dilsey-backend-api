@@ -86,7 +86,8 @@ const login =  (req, res, next) => {
 
                 if(err) {
                     res.json({
-                        error: err
+                        error: err,
+                        name : "krishna"
                     });
                     console.log("error occured in bcrypt compare ");
                 }
