@@ -6,11 +6,11 @@ const randomQuestions = (req,res,next) => {
     .then((questions) => {
         if(questions.length == 0 || questions.length < process.env.NOOFQUESTIONS){
            res.json({
-               "status" : "no enough questions in the database",
+               "status" : "Not enough questions in the database",
            })   
         }
         else{
-            question.Question.aggregate([{ $sample : { size : process.env.NOOFQUESTIONS }}])            
+            question.find({}).limit(1)            
              .then((selectedQuestions)=> {      
                 res.json({
                       "questions" : selectedQuestions,
@@ -32,7 +32,7 @@ const writeQuestions = (req,res,next) => {
     question.save()
     .then((result) => {
         res.json({
-            "result" : "questions inserted succesfully"
+            "result" : "Questions added succesfully."
         })
     }).catch(err => {next(err)
            console.log("error occured during insertion of questions into the database")
