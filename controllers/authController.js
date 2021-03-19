@@ -4,8 +4,8 @@ const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
 
-const  register =  (req, res, next) => {
-    
+const register = (req, res, next) => {
+
 User.findOne({email : req.body.email})
     .then(user => {
         if(user) {
@@ -13,27 +13,20 @@ User.findOne({email : req.body.email})
                 message: "This email is already registered"
             });
         } else {
-               bcrypt.hash(req.body.password, 10).then((err,hashedPass) => {
+               bcrypt.hash(req.body.password, 10).then((hashedPass) => {
 
-                var generateId = () => {
+            /*    var generateId = () => {
                     var id = "";
                     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                    for (i = 0; i < 8; i++) {
+                    for (var i = 0; i < 8; i++) {
                         id = id + possible.charAt(Math.floor(Math.random() * possible.length));
                     }
                     return id;
-                }
+                }*/
         
-                let idRes = generateId();
-        
-                // console.log(idRes);
-        
-                if(err) {
-                    res.json({
-                        error: err
-                    });
-                    console.log("error occured in the bcrypt hash function");
-                }
+                //let idRes = generateId();
+                // console.log(idRes);        
+                
 
                 var generateRole = () => {
                     let roleid = 1; //user
@@ -47,7 +40,8 @@ User.findOne({email : req.body.email})
                 let role = generateRole();
        
                 let user = new User({
-                    customId: idRes,
+
+                   // customId: idRes,
                     name: req.body.name,
                     email: req.body.email,
                     company: req.body.company,
@@ -68,29 +62,28 @@ User.findOne({email : req.body.email})
                     });
                     console.log(error)
                 });
+            })
+            .catch((err) => {
+                    res.json({
+                        error: err
+                    });
             });
         }
     });
 }
 
+
+
 const login =  (req, res, next) => {
 
     var email = req.body.email;
     var password = req.body.password;
-
-    User.findOne({email: email})
+    
+   User.findOne({email: email})
     .then(user => {
-
         if(user) {
-            bcrypt.compare(password, user.password, (err, result) => {
-
-                if(err) {
-                    res.json({
-                        error: err,
-                        name : "krishna",
-                        result : result
-                    });
-                }
+            bcrypt.compare(password, user.password)
+            .then((result) => {
                   if(result) {
                     let token = jwt.sign({name: user.name}, 'verySecretValue', {expiresIn: '1h'});
                     res.json({
@@ -102,8 +95,12 @@ const login =  (req, res, next) => {
                         message: "Password does not matched***"
                     });
                 }
+            }).catch((err) => {
+                    res.json({
+                        error: err,
+                    });
+                    next(err)
             });
-
 
         }else {
             res.json({
@@ -111,10 +108,12 @@ const login =  (req, res, next) => {
             });
         }
     });
-
-
 }
+
+
+
 
 module.exports = {
     register, login
 }
+

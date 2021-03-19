@@ -1,7 +1,7 @@
 const Question = require("../models/questionsSchema");
 
 const randomQuestions = (req,res,next) => {
-    Question.find({})//returns a cursor object which is an array
+    Question.find({}) //returns a cursor object which is an array
     .then((questions) => {
         if(questions.length == 0 || questions.length < process.env.NOOFQUESTIONS){
             res.json({
@@ -38,6 +38,7 @@ const writeQuestions = (req,res,next) => {
            console.log("error occured during insertion of questions into the database")
     })
 }
+
 module.exports = {
     randomQuestions,writeQuestions
 }
