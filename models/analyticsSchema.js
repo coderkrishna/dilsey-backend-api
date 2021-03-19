@@ -5,15 +5,15 @@ const analyticsSchema = new mongoose.Schema({
         type : Number,
         required :true
     },
-    usersQuiz : {
+    usersquiz : {
         type: Number,
         required : true 
     },
-    usersPassed : {
+    userspassed : {
         type : Number,
 
     },
-    quizesTaken : {
+    quizzestaken : {
         type :  Number,
     }
 });

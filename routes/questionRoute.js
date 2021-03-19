@@ -4,7 +4,7 @@ const questionController = require("../controllers/questionController");
 
 const questionRouter = express.Router();
 
-questionRouter.get("/questions",questionController);
+questionRouter.get("/quiz",questionController);
 
 module.exports = questionRouter;
 

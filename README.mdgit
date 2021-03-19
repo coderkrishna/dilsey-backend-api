@@ -1,0 +1,2 @@
+"# dilsey_api"  initgit add README.mdgit commit -m "first commit"git branch -M maingit remote add origin https://github.com/viveninfomedia/dilsey_api.gitgit push -u origin main
+"# dilsey_api"  initgit add README.mdgit commit -m "first commit"git branch -M maingit remote add origin https://github.com/viveninfomedia/dilsey_api.gitgit push -u origin main

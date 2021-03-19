@@ -4,20 +4,17 @@ const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
 
-const sgMail = require("@sendgrid/mail");
 
-sgMail.setApiKey(process.env.SG_API_KEY);
-
-const register =  async (req, res, next) => {
+const register =  (req, res, next) => {
     
-    await User.findOne({email : req.body.email})
+    User.findOne({email : req.body.email})
     .then(user => {
         if(user) {
             res.json({
                 message: "This email is already registered"
             });
         } else {
-            bcrypt.hash(req.body.password, 10, (err, hashedPass) => {
+               bcrypt.hash(req.body.password, 10).then((err,hashedPass) => {
 
                 var generateId = () => {
                     var id = "";
@@ -48,19 +45,7 @@ const register =  async (req, res, next) => {
                 }
 
                 let role = generateRole();
-
-                const msg = {
-                        to: req.body.email, // Change to your recipient
-                        from: 'pallav@kahaniya.com', // Change to your verified sender
-                        subject: `Your DilseY account created succesfully`,
-                        text: `Your account with DilseY is created succesfully,please login with the id ${idRes} as USERNAME and the password provided by you as the  PASSWORD`, 
-                        html: `<strong>WELCOME TO DILSEY</strong><br><p>Your account with DilseY is created succesfully<br>Please login with the username ${idRes} and the password which you set during the registration time.</p>`
-                       
-                }
-
-                
-
-        
+       
                 let user = new User({
                     customId: idRes,
                     name: req.body.name,
@@ -72,18 +57,9 @@ const register =  async (req, res, next) => {
 
                 });
 
-                 await user.save().then(user => { 
-                       sgMail
-                        .send(msg)
-                        .then(() => {
-                          console.log('Email sent to the user');
-                        })
-                        .catch((error) => {
-                          console.error(error)
-                        })
-                                        
+                user.save().then(user => {                          
                     res.json({
-                        dvid: idRes,
+                        email : req.body.email,
                         message: "User added successfully!"
                     });
                 }).catch(error => {
@@ -97,12 +73,12 @@ const register =  async (req, res, next) => {
     });
 }
 
-const login = async (req, res, next) => {
+const login =  (req, res, next) => {
 
-    var id = req.body.dvid;
+    var email = req.body.email;
     var password = req.body.password;
 
-    await User.findOne({customId: id})
+    User.findOne({email: email})
     .then(user => {
 
         if(user) {

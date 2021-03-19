@@ -6,7 +6,7 @@ const questionSchema = new mongoose.Schema({
       },
       "options" : {
           type : Array,
-          maxsize: 4,
+          maxsize: 5,
           required : true
       },
 
@@ -16,4 +16,4 @@ const questionSchema = new mongoose.Schema({
 },{timestamps : true})
 
 const Question = mongoose.model("Question",questionSchema);
-module.exports = {Question};
+module.exports = Question;

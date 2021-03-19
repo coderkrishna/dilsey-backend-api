@@ -8,10 +8,11 @@ const {authRole , authUser , setUser } = require("./controllers/basicAuth");
 const AuthRoute = require('./routes/authRoute');
 const adminRoute = require('./routes/adminRoute');
 const questionRoute = require("./routes/questionRoute");
-
+const enrolRoute = require("./routes/enrolRoute");
 //Setting environment variables
 const port = process.env.PORT || 8080;
-app.use(bodyParser.urlencoded({extended:true}))
+
+//app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json());
 
 
@@ -30,10 +31,11 @@ mongoose.connect(process.env.DATABASE,
 
 // app.get('/', "Api deployed successfully!");
 app.use('/api',AuthRoute);
-app.use(setUser);
-app.use('/home',authUser,questionRoute);
-app.use("/admin",authUser,authRole,adminRoute);
-// app.get('/', "Api deployed successfully!")
+//app.use(setUser);
+app.use('/api',questionRoute);
+app.use("/admin",adminRoute);
+app.use("/api",enrolRoute);
+
 
 app.get("/", () =>{
     console.log("Successfully Deployed");

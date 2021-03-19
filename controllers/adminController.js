@@ -1,4 +1,4 @@
- const Analytics = require("../models/analyticsSchema");
+const Analytics = require("../models/analyticsSchema");
 const analytics = require("../models/analyticsSchema");
 
 
@@ -19,9 +19,9 @@ const analytics = require("../models/analyticsSchema");
  const writeAnalytics = (req,res,next) => {
      var analytics = new Analytics({
           noofusers : req.body.noofusers,
-          usersQuiz : req.body.usersQuiz,
-          usersPassed : req.body.usersPassed,
-          noofquizzes : req.body.noofquizzes        
+          usersquiz : req.body.usersquiz,
+          userspassed : req.body.userspassed,
+          quizzestaken : req.body.noofquizzes        
      })
 
      analytics.save().then(() => {
