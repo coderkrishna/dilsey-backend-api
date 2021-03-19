@@ -4,13 +4,13 @@ const question = require("../models/questionsSchema");
 const randomQuestions = (req,res,next) => {
     question.Question.find({})//returns a cursor object which is an array
     .then((questions) => {
-        if(questions.length === 0 || questions.length < process.env.NOOFQUESTIONS){
+        if(questions.length == 0 || questions.length < process.env.NOOFQUESTIONS){
            res.json({
                "status" : "no enough questions in the database",
            })   
         }
         else{
-            question.Question.aggregate([{ $sample : { size : 10 }}])            
+            question.Question.aggregate([{ $sample : { size : process.env.NOOFQUESTIONS }}])            
              .then((selectedQuestions)=> {      
                 res.json({
                       "questions" : selectedQuestions,
