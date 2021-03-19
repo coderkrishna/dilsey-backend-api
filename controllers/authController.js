@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
 
-const register =  (req, res, next) => {
+const  register =  (req, res, next) => {
     
     User.findOne({email : req.body.email})
     .then(user => {
@@ -88,6 +88,7 @@ const login =  (req, res, next) => {
                     res.json({
                         error: err
                     });
+                    console.log("error occured in bcrypt compare ");
                 }
                 if(result) {
                     let token = jwt.sign({name: user.name}, 'verySecretValue', {expiresIn: '1h'});
