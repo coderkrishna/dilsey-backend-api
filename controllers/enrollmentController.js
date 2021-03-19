@@ -41,7 +41,7 @@ const enrol = async (req,res,next) => {
 
         });
 
-        enrollment.save().then(user => { 
+        await enrollment.save().then(user => { 
             sgMail
              .send(msg)
              .then(() => {
