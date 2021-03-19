@@ -32,9 +32,9 @@ mongoose.connect(process.env.DATABASE,
 // app.get('/', "Api deployed successfully!");
 app.use('/api',AuthRoute);
 //app.use(setUser);
-app.use('/api',questionRoute);
-app.use("/admin",adminRoute);
-app.use("/api",enrolRoute);
+app.use('/api',authUser,questionRoute);
+app.use("/admin",authUser,authRole,adminRoute);
+app.use("/api",authUser,authRole,enrolRoute);
 
 
 app.get("/", () =>{

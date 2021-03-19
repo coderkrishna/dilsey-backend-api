@@ -1,15 +1,16 @@
 const jwt = require("jsonwebtoken");
 
-
-
 const authUser = (req,res,next) => {
-    
-    if(req.user == null){
-      res.statusCode = 403;  
-      res.json({
-          "message" : "you need to signin first"
-      })
-    }
+      try {
+          const token = req.headers.authorization.split(" ")[1];
+          const decoded = jwt.verify(token, process.env.JWT_KEY);
+          req.userData = decoded;
+          next();
+      } catch (error) {
+          return res.status(401).json({
+              message: 'Auth failed'
+          });
+      };
     next()
 }
 
