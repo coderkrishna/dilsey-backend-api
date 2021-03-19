@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
 
-
 const register =  (req, res, next) => {
     
     User.findOne({email : req.body.email})

@@ -7,7 +7,7 @@ sgMail.setApiKey(process.env.SG_API_KEY);
 const enrol = async (req,res,next) => {
 
   await Enrollment.findOne({email : req.body.email})
-    .then(user => {
+    .then( async user => {
         if(user) {
             res.json({
                 message: "This email is already enrolled"
