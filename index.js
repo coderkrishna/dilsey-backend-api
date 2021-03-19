@@ -40,6 +40,7 @@ app.use("/api",authUser,authRole,enrolRoute);
 app.get("/", () =>{
     console.log("Successfully Deployed");
 })
+
 app.listen(port, () => {
     console.log("Server started on port: 8080");
 });
