@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const  register =  (req, res, next) => {
     
-    User.findOne({email : req.body.email})
+User.findOne({email : req.body.email})
     .then(user => {
         if(user) {
             res.json({
