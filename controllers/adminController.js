@@ -1,7 +1,6 @@
 const Analytics = require("../models/analyticsSchema");
 const analytics = require("../models/analyticsSchema");
 
-
  const readAnalytics = (req,res,next) => {
    analytics.find({})  
     .then((result) => {
@@ -31,9 +30,8 @@ const analytics = require("../models/analyticsSchema");
      })
      .catch((err) => {
       res.json({
-         "message" : "analytics updation not succesful"
+         "message" : "analytics updation not succesful",
       })     
-      next(err)
    });
  }
 

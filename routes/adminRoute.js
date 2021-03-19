@@ -6,3 +6,4 @@ analyticsRoute.get("/getanalytics",analyticsController.readAnalytics);
 analyticsRoute.post("/postanalytics",analyticsController.writeAnalytics);
 
 module.exports = analyticsRoute;
+

@@ -91,13 +91,13 @@ const login =  (req, res, next) => {
                         result : result
                     });
                 }
-                if(result) {
+                  if(result) {
                     let token = jwt.sign({name: user.name}, 'verySecretValue', {expiresIn: '1h'});
                     res.json({
                         message: "Login Successfully!",
                         token: token
                     });
-                }else {
+                 }else {
                     res.json({
                         message: "Password does not matched***"
                     });
