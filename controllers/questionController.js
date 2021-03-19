@@ -4,14 +4,14 @@ const randomQuestions = (req,res,next) => {
     Question.find({})//returns a cursor object which is an array
     .then((questions) => {
         if(questions.length == 0 || questions.length < process.env.NOOFQUESTIONS){
-           return res.json({
+            res.json({
                "status" : "Not enough questions in the database",
            })   
         }
         else{
-            return questions.aggregate({$select : {size : process.env.NOOFQUESTIONS}})            
+         questions.aggregate({$select : {size : process.env.NOOFQUESTIONS}})            
              .then((selectedQuestions)=> {      
-                res.json({
+                 res.json({
                       "questions" : selectedQuestions,
                 })
             })
