@@ -9,7 +9,7 @@ const randomQuestions = (req,res,next) => {
            })   
         }
         else{
-          Question.aggregate([{$select : {size : process.env.NOOFQUESTIONS}}])            
+          Question.aggregate([{$sample : {size : process.env.NOOFQUESTIONS}}])            
              .then((selectedQuestions)=> {      
                  res.json({
                       "questions" : selectedQuestions,
