@@ -1,7 +1,7 @@
-const Question = require("../models/questionsSchema");
+const question = require("../models/questionsSchema");
 
 const randomQuestions = (req,res,next) => {
-    Question.find({})//returns a cursor object which is an array
+    question.find({})//returns a cursor object which is an array
     .then((questions) => {
         if(questions.length == 0 || questions.length < process.env.NOOFQUESTIONS){
             res.json({
@@ -9,7 +9,7 @@ const randomQuestions = (req,res,next) => {
            })   
         }
         else{
-         return Question.aggregate({$select : {size : process.env.NOOFQUESTIONS}})            
+          question.aggregate({$select : {size : process.env.NOOFQUESTIONS}})            
              .then((selectedQuestions)=> {      
                  res.json({
                       "questions" : selectedQuestions,
@@ -22,7 +22,7 @@ const randomQuestions = (req,res,next) => {
 }
 
 const writeQuestions = (req,res,next) => {
-    var questionone = new Question({
+    var questionone = new question({
         question : req.body.question,
         options : req.body.options,
         answer : req.body.answer
