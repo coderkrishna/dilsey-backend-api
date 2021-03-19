@@ -87,9 +87,9 @@ const login =  (req, res, next) => {
                 if(err) {
                     res.json({
                         error: err,
-                        name : "krishna"
+                        name : "krishna",
+                        result : result
                     });
-                    console.log("error occured in bcrypt compare ");
                 }
                 if(result) {
                     let token = jwt.sign({name: user.name}, 'verySecretValue', {expiresIn: '1h'});
@@ -103,6 +103,8 @@ const login =  (req, res, next) => {
                     });
                 }
             });
+
+
         }else {
             res.json({
                 message: "No user found!"
