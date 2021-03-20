@@ -34,7 +34,7 @@ app.use('/api',AuthRoute);
 //app.use(setUser);
 app.use(setUser);
 app.use('/api',authUser,questionRoute);
-app.use("/admin",authUser,authRole,adminRoute);
+app.use("/api",authUser,authRole,adminRoute);
 app.use("/api",authUser,authRole,enrolRoute);
 
 

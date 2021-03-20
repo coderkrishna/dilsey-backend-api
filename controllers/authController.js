@@ -16,9 +16,9 @@ User.findOne({email : req.body.email})
                bcrypt.hash(req.body.password, 10).then((hashedPass) => {
 
             /*    var generateId = () => {
-                    var id = "";
+                    var id = `DV${batch_no}` ;
                     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                    for (var i = 0; i < 8; i++) {
+                    for (var i = 0; i < 4; i++) {
                         id = id + possible.charAt(Math.floor(Math.random() * possible.length));
                     }
                     return id;
