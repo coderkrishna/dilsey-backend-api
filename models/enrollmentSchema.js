@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema(
+const enrollmentSchema = new mongoose.Schema(
     {
+        enrollmentId: {
+            type: String,
+        },
         name: {
             type : String,
             required : true,
@@ -23,15 +26,11 @@ const userSchema = new mongoose.Schema(
             type: String,
             maxlength:10
         },
-        password: {
-            type: String
-        },
-        role : {
-            type : Number
-        }
+    
+        
     }, {timestamps: true}
 );
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const Enrollment = mongoose.model('enrollment', enrollmentSchema);
+module.exports = Enrollment;
 
