@@ -4,7 +4,7 @@ const sgMail = require("@sendgrid/mail");
 const Enrollment = require("../models/enrollmentSchema");
 sgMail.setApiKey(process.env.SG_API_KEY);
 
-const enrol = async (req,res,next) => {
+const enrol =  (req,res,next) => {
 
   await Enrollment.findOne({email : req.body.email})
     .then(user => {
@@ -41,7 +41,7 @@ const enrol = async (req,res,next) => {
 
         });
 
-        await enrollment.save().then(user => { 
+         enrollment.save().then(user => { 
             sgMail
              .send(msg)
              .then(() => {
