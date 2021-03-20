@@ -31,7 +31,9 @@ const Analytics = require("../models/analyticsSchema");
       res.json({
          "message" : "analytics updation not succesful",
       })
+      next(err)
    });
+   next();
  }
 
  module.exports = {
