@@ -8,7 +8,7 @@ const authUser = (req,res,next) => {
           req.userid = decoded; 
           next();
       } catch (error) {
-          return res.status(401).json({
+          res.status(401).json({
               message: 'Auth failed'
           });
       };
@@ -18,14 +18,14 @@ const authUser = (req,res,next) => {
 const setUser = (req, res, next) => {
     const useremail = req.body.email;
     if (useremail) {
-      req.userid = User.find({}).then((user) => user.email === userId)
+      res.userid = User.find({}).then((user) => user.email === useremail)
     }
     next()
   }
 
 const authRole = (role) => {
     return (req,res,next) => {
-       if(req.role === role){
+       if(req.role !== role){
            res.status(401);
            return res.json({
                 "message" : "You are not authorized to access the page",    
