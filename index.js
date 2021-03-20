@@ -29,7 +29,7 @@ mongoose.connect(process.env.DATABASE,
         console.log("Database Connected Successfully!!!");
 });   
 
-// app.get('/', "Api deployed successfully!");
+
 app.use('/api',AuthRoute);
 //app.use(setUser);
 app.use(setUser);

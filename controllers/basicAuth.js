@@ -16,8 +16,8 @@ const authUser = (req,res,next) => {
 }
 
 const setUser = (req, res, next) => {
-    const userId = req.body.email;
-    if (userId) {
+    const useremail = req.body.email;
+    if (useremail) {
       req.userid = User.find({}).then((user) => user.email === userId)
     }
     next()
