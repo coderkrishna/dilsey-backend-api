@@ -14,7 +14,7 @@ const enrol =  (req,res,next) => {
             });
         } else {
                var generateId = () => {
-                    var id = `DV${batch_name}`;
+                    var id = `DV01`;
                     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                     for (i = 0; i < 4; i++) {
                         id = id + possible.charAt(Math.floor(Math.random() * possible.length));
