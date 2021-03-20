@@ -6,7 +6,7 @@ sgMail.setApiKey(process.env.SG_API_KEY);
 
 const enrol =  (req,res,next) => {
 
-  await Enrollment.findOne({email : req.body.email})
+   Enrollment.findOne({email : req.body.email})
     .then(user => {
         if(user) {
             res.json({
