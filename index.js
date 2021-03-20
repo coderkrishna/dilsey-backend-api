@@ -32,7 +32,7 @@ mongoose.connect(process.env.DATABASE,
 
 app.use('/api',AuthRoute);
 //app.use(setUser);
-app.use(setUser);
+//app.use(setUser);
 app.use('/api',authUser,questionRoute);
 app.use("/api",authUser,authRole(process.env.ADMIN_ROLE),adminRoute);
 app.use("/api",enrolRoute);
