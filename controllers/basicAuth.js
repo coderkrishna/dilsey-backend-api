@@ -5,7 +5,7 @@ const authUser = (req,res,next) => {
       try {
           const token = req.Headers.authorization.split(" ")[1];
           const decoded = jwt.verify(token,process.env.JWT_KEY);
-          req.user = decoded;
+          req.userid = decoded; 
           next();
       } catch (error) {
           return res.status(401).json({
@@ -18,7 +18,7 @@ const authUser = (req,res,next) => {
 const setUser = (req, res, next) => {
     const userId = req.body.email;
     if (userId) {
-      req.user = User.find({}).then((user) => user.email === userId)
+      req.userid = User.find({}).then((user) => user.email === userId)
     }
     next()
   }
