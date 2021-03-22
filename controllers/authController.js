@@ -15,14 +15,21 @@ User.findOne({email : req.body.email})
         } else {
                bcrypt.hash(req.body.password, 10).then((hashedPass) => {
 
-            /*    var generateId = () => {
+                var generateId = () => {
                     var id = `DV${batch_no}` ;
-                    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                    for (var i = 0; i < 4; i++) {
+                    var possible = "0123456789";
+                    for (var i = 0; i < 6; i++) {
                         id = id + possible.charAt(Math.floor(Math.random() * possible.length));
                     }
                     return id;
-                }*/
+                }
+
+                var activeTime = () => {
+                    // generated id is valid for 24 hrs
+                    return  Date.now() + 24 * 3600 * 1000;
+                }
+
+               
         
                 //let idRes = generateId();
                 // console.log(idRes);        
@@ -37,7 +44,15 @@ User.findOne({email : req.body.email})
                     return roleid;
                 }
 
+                var activeStatus = () => {
+                    
+                }
+
+                let verificationid = generateId();
+
                 let role = generateRole();
+
+                let activeExpires = activeTime();
        
                 let user = new User({
 
@@ -47,6 +62,9 @@ User.findOne({email : req.body.email})
                     company: req.body.company,
                     phone: req.body.phone,
                     password: hashedPass,
+                    active : false,
+                    activationcode : verificationid,
+                    activeExpires: activeExpires,
                     role : role
 
                 });

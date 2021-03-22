@@ -28,6 +28,16 @@ const userSchema = new mongoose.Schema(
         },
         role : {
             type : Number
+        },
+        active : {
+            type : Boolean,
+            default : false
+        },
+        activationcode : {
+           type : String,
+        },
+        activeExpires : {
+            type : Date
         }
     }, {timestamps: true}
 );
